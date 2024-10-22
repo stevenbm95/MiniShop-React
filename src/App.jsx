@@ -5,9 +5,9 @@ import Footer from "./layout/Footer";
 import Main from "./layout/Main";
 import Navbar from "./layout/Navbar";
 import ProductsPage from "./pages/products/ProductsPage";
-import Admin from "./components/admin/Admin";
 import { ToastContainer } from "react-toastify";
 import CartPage from "./pages/cart/CartPage";
+import AdminPage from "./pages/admin/AdminPage";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/products" element={<ProductsPage />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/cart" element={<CartPage />} />
         </Routes>

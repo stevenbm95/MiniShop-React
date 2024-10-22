@@ -74,7 +74,7 @@ const ProductModal = () => {
   return (
     <>
       <div
-        className=""
+        className="absolute right-32 bottom-60"
         onClick={() => document.getElementById("products_modal").showModal()}
       >
         <ProductAddIcon />
