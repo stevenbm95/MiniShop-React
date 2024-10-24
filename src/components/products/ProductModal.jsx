@@ -12,7 +12,7 @@ import Button from "../common/Button";
 
 const ProductModal = () => {
   const { register, handleSubmit, reset, formState: { errors }, } = useForm();
-  const { product, createProduct, isEditing, setIsEditing, updateProducts } =  useStoreProducts();
+  const { product, createProduct, isEditing, setIsEditing } =  useStoreProducts();
 
 
   useEffect(() => {
@@ -51,11 +51,15 @@ const ProductModal = () => {
       ...data,
       price: parseFloat(data.price),
       stock: parseInt(data.stock),
-    };   
+      isActive: product.isActive ? true : false,
+      image: product.image || "",
+    };
 
     if(isEditing){
       notify("","Actualizdo Correctamente",3000);
-      updateProducts(product.id, prepareData)
+      const productEdited = {...prepareData, id: product.id};
+      
+      createProduct(productEdited);
     } else {
       notify("success","Agregado Correctamente",3000);
       

@@ -3,7 +3,7 @@ import Product from "./Product";
 import ProductModal from "./ProductModal";
 
 const ProductsList = () => {
-  const { products } = useStoreProducts();
+  const { products } = useStoreProducts();  
 
   return (
     <div className="container mx-auto">

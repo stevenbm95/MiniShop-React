@@ -1,10 +1,15 @@
 
+import { useEffect } from "react";
 import ProductModal from "../../components/products/ProductModal";
 import ProductsList from "../../components/products/ProductsList";
 import useStoreProducts from "../../stores/products/StoreProducts";
 
 const ProductsPage = () => {
-const {products} = useStoreProducts();
+const {products, loadProducts} = useStoreProducts();
+
+  useEffect(() => {
+    loadProducts();
+  }, [loadProducts]);
 
   return (
     

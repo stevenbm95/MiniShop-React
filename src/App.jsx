@@ -10,6 +10,9 @@ import CartPage from "./pages/cart/CartPage";
 import AdminPage from "./pages/admin/AdminPage";
 
 function App() {
+
+  
+
   return (
     <Router>
       <Navbar />
