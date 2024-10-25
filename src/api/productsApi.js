@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = "https://wfmrxnw0s6.execute-api.us-east-2.amazonaws.com/test/products";
 
 export const getProductsApi = async () => {
   try {
