@@ -2,6 +2,8 @@ import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/products";
 
+
+
 export const getProductsApi = async () => {
   try {
     const resp = await axios.get(baseUrl);

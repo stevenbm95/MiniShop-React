@@ -10,13 +10,10 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: process.env.VITE_API_URL,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     target: import.meta.env.VITE_API_URL,
+  //     changeOrigin: true,
+  //   },
+  // },
 });
