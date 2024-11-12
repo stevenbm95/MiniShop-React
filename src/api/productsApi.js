@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = import.meta.env.VITE_API_URL + "/products";
+const baseUrl = import.meta.env.VITE_API_BACKEND + "/api/products";
 
 
 
@@ -10,6 +10,7 @@ export const getProductsApi = async () => {
     const data = resp.data;
     localStorage.setItem("products", JSON.stringify(data));
     console.log("Consulta api");
+    
     return data;
   } catch (error) {
     console.log("Error al obtener productos", error);

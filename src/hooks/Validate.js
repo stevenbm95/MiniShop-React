@@ -1,9 +1,7 @@
 import { notify } from "../components/common/Toast";
 
 
-const validate = (errors) => {
-  console.log(errors);
-  
+const validate = (errors) => {  
   if (Object.keys(errors).length > 0) {
     // Si hay errores, muestra los mensajes correspondientes
     Object.keys(errors).forEach((errorKey) => {

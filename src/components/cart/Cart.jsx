@@ -5,10 +5,9 @@ import IconCart from "./IconCart";
 import FormatNumber from "../common/formatNumber";
 
 const Cart = () => {
-  const { cart, addTotalToCart } = useSotreCart();
+  const { cart } = useSotreCart();
 
   const subTotal = cart.reduce( (acc, currentItem) => (acc + currentItem.product.price * currentItem.cuantity), 0);
-  const total = subTotal * 0.19;
   const products = cart.length;
 
   
@@ -19,7 +18,6 @@ const Cart = () => {
     
     console.log("Buy cart");
   };
-  console.log(cart);
   
   return (
     <div className="dropdown dropdown-end">

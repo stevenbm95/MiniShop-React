@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import useStoreProducts from "../../stores/products/StoreProducts";
-import ProductAddIcon from "./ProductAddIcon";
+import ProductAddIcon from "../products/ProductAddIcon";
 import { useForm } from "react-hook-form";
+// import { ToastContainer, toast } from "react-toastify";
 import { notify } from "../common/Toast";
 import Button from "../common/Button";
 
-
-const ProductModal = () => {
+const CustomerModal = () => {
   const { register, handleSubmit, reset, formState: { errors }, } = useForm();
   const { product, createProduct, isEditing, setIsEditing } =  useStoreProducts();
 
 
   useEffect(() => {
-    const modal = document.getElementById("products_modal");
+    const modal = document.getElementById("customer_modal");
     // Cuando el modal se cierra, cambia isEditing a false
     const handleClose = () => {
       setIsEditing(false);
@@ -40,7 +40,7 @@ const ProductModal = () => {
         stock:"",
         description:""});
     }
-  }, [isEditing, product, reset]);  
+  }, [isEditing, product, reset]);
  
   const onSubmit = (data) => {    
     const prepareData = {
@@ -53,16 +53,18 @@ const ProductModal = () => {
 
     if(isEditing){
       notify("","Actualizdo Correctamente",3000);
-      const productEdited = {...prepareData, id: product.id};      
+      const productEdited = {...prepareData, id: product.id};
+      
       createProduct(productEdited);
     } else {
-      notify("success","Agregado Correctamente",3000);      
+      notify("success","Agregado Correctamente",3000);
+      
       createProduct(prepareData);
     }
     
     reset();
     
-    document.getElementById("products_modal").close();
+    document.getElementById("customer_modal").close();
     setTimeout(() => {
       setIsEditing(false);
     }, 250);
@@ -73,17 +75,17 @@ const ProductModal = () => {
     <>
       <div
         className="absolute right-32 bottom-60"
-        onClick={() => document.getElementById("products_modal").showModal()}
+        onClick={() => document.getElementById("customer_modal").showModal()}
       >
         <ProductAddIcon />
       </div>
       <dialog
-        id="products_modal"
+        id="customer_modal"
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box">
           <h3 className="font-bold text-lg">
-            {isEditing ? "Editar Producto" : "Agrega un Producto"}
+            {isEditing ? "Editar Cliente" : "Agrega cliente"}
           </h3>
           <div className="modal-action justify-center">
             <form
@@ -94,38 +96,23 @@ const ProductModal = () => {
               <label className="input input-bordered flex items-center gap-2">
                 Nombre:
                 <input
-                  {...register("nameProduct", { required: true })}
+                  {...register("name", { required: true })}
                   type="text"
                   className="grow"
                 />
               </label>
-              {errors.nameProduct && <span className="text-error">El nombre es rquerido</span>}
+              {errors.name && <span className="text-error">El nombre es rquerido</span>}
 
               <label className="input input-bordered flex items-center gap-2">
-                Precio:
+                Email:
                 <input
-                  {...register("price", { required: true, type: "number" })}
-                  type="number"
+                  {...register("email", { required: true, type: "email" })}
+                  type="email"
                   className="grow"
                 />
               </label>
-              {errors.price && <span className="text-error">El precio es requerido y debe ser un numero</span>}
-              <label className="input input-bordered flex items-center gap-2">
-                Cantidad:
-                <input
-                  {...register("stock", { required: true, type: "number" })}
-                  type="number"
-                  className="grow"
-                />
-              </label>
-              {errors.stock && <span className="text-error">La cantidad es requerida y debe ser un numero</span>}
-              <textarea
-                {...register("description", { required: true })}
-                className="textarea textarea-bordered"
-                placeholder="Descripción del producto"
-              ></textarea>
-              {errors.description && <span className="text-error">La descripción es errequerida</span>}
-              {/* if there is a button in form, it will close the modal */}
+              {errors.email && <span className="text-error">El email es requerido</span>}
+
               <Button
                 style={"primary"}
                 // onClick={validate2}
@@ -139,4 +126,4 @@ const ProductModal = () => {
   );
 };
 
-export default ProductModal;
+export default CustomerModal;

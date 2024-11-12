@@ -4,58 +4,34 @@ import useSotreCart from "../../stores/cart/StoreCart";
 
 import Button from "../common/Button";
 import { notify } from "../common/Toast";
-
+import ControlQuantity from "../common/ControlQuantity";
 
 const Product = ({ product }) => {
-  const [cuantity, setCuantity] = useState(0);
   const [availableProducts, setAvailableProducts] = useState(product.stock);
-  const { cart, addProductToCart, updateProductQuantityCart } = useSotreCart();
-
-  const handleAddCuantity = () => {
-
-    if(availableProducts > cuantity) {
-      setCuantity(cuantity + 1);
-    } else {
-      notify("error", "No puedes agregar mas de este producto", 3000);
-      return;
-    }
-    
-  };
-
-  const handleRestCuantity = () => {
-    if (cuantity <= 0) {
-      setCuantity(0);
-      return;
-    }
-    setCuantity(cuantity - 1);
-  };
+  const { cart, addProductToCart, updateProductQuantityCart, quantity } =  useSotreCart();
 
   const validate = (actualProduct) => {
     const validar = cart.filter((item) => item.product.id === actualProduct.id);
+
     if (validar.length > 0) {
       notify("info", "Carrito actualizado", 1000);
-      return updateProductQuantityCart(product, cuantity);
-    } else {
-      notify("success", "Producto agregado al carrito", 1000);
-      return addProductToCart(product, cuantity);
+      return updateProductQuantityCart(product, quantity);
     }
+    notify("success", "Producto agregado al carrito", 1000);
+    return addProductToCart(product, quantity);
   };
 
   const handdleAddToCart = () => {
-    console.log("Cantidad:", cuantity);
-    if (cuantity <= 0)
+    if (quantity <= 0)
       return notify("error", "Debes agregar una cantidad mayor a 0", 3000);
+
     validate(product);
 
-    if(availableProducts - cuantity < 0){
-      notify("error", "No hay stock disponible", 3000);
-      return;
+    if (availableProducts - quantity < 0) {
+      return notify("error", "No hay stock disponible", 3000);
     } else {
-      // updateProducts(product.id, {stock: product.stock-cuantity});
-      setAvailableProducts( availableProducts - cuantity )
+      setAvailableProducts(availableProducts - quantity);
     }
-
-    setCuantity(0);
   };
 
   const { nameProduct, price, description } = product;
@@ -75,13 +51,7 @@ const Product = ({ product }) => {
         <p>Disponibles: {availableProducts}</p>
         <div className="card-actions  justify-end">
           <div className="flex flex-col items-center">
-            <div className="flex gap-2 border-2 border-base-content/20 rounded-md mb-2 p-2">
-              <button className="" onClick={handleRestCuantity}>
-                -
-              </button>
-              {cuantity}
-              <button onClick={handleAddCuantity}>+</button>
-            </div>
+            <ControlQuantity product={product}  />
 
             <Button
               style={"primary"}

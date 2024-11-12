@@ -56,23 +56,23 @@ const useStoreProducts = create((set) => ({
     //       products: newArray,
     //     };
     //   }),
-  // updateProducts: (productId, data) => set((state) => {
+  updateProducts: (productId, data) => set((state) => {
     
-  //   const newArray = state.products.map((p) => {
-  //     if (p.id === productId) {
-  //       const updatedProduct = {
-  //         ...p,
-  //         ...data,
-  //       };
-  //       return updatedProduct;
-  //     }
-  //     return p;
-  //   });
-  //   localStorage.setItem("products", JSON.stringify(newArray));
-  //   return {
-  //     products: newArray,
-  //   };
-  // }),
+    const newArray = state.products.map((p) => {
+      if (p.id === productId) {
+        const updatedProduct = {
+          ...p,
+          ...data,
+        };
+        return updatedProduct;
+      }
+      return p;
+    });
+    localStorage.setItem("products", JSON.stringify(newArray));
+    return {
+      products: newArray,
+    };
+  }),
   // deleteProduct: (productId) => set((state) => {
   //   const newArray = state.products.filter((p) => p.id !== productId);
   //   localStorage.setItem("products", JSON.stringify(newArray));

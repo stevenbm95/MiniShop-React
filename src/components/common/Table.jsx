@@ -1,17 +1,23 @@
 import FormatNumber from "./formatNumber";
 import Button from "./Button";
 import useSotreCart from "../../stores/cart/StoreCart";
-import { useEffect } from "react";
+import PropTypes from "prop-types";
 
 const Table = ({ headTable, content }) => {
+  const { cart, addValuesToCart, removeProductCart } = useSotreCart();
 
-  // const { addTotalToCart } = useSotreCart();
-  const subTotal = content.reduce((acc, currentItem) =>  acc + currentItem.product.price * currentItem.cuantity, 0 );
-  const total = subTotal + subTotal * 0.19; 
+  const subTotal = content.reduce(
+    (acc, currentItem) =>
+      acc + currentItem.product.price * currentItem.cuantity,
+    0
+  );
+  const total = subTotal + subTotal * 0.19;
 
+   
+  console.log(cart);
   return (
-    <div className="container mx-auto max-w-[65rem]">
-      <div className="overflow-x-auto">
+    <div className="container mx-auto flex flex-col max-w-[65rem] items-end">
+      <div className="overflow-x-auto w-full">
         <table className="table">
           {/* head */}
           <thead>
@@ -28,7 +34,7 @@ const Table = ({ headTable, content }) => {
           </thead>
           <tbody>
             {content.map((item) => (
-              <tr key={item.product.id + Math.random()}>
+              <tr key={item.id + Math.random()}>
                 <th>
                   <label>
                     <input type="checkbox" className="checkbox" />
@@ -51,15 +57,12 @@ const Table = ({ headTable, content }) => {
                 </td>
                 <td>{item.product.nameProduct}</td>
                 <td>{item.cuantity}</td>
-                <td><FormatNumber price={item.product.price} /></td>
-                <th className="flex gap-3">
-                  <Button
-                    style={"primary"}
-                    // onClick={() => handleEdit(product)}
-                    message="Editar"
-                  />
-                  <Button style={"error"} message="Eliminar" />
-                </th>
+                <td>
+                  $ <FormatNumber price={item.product.price} />
+                </td>
+                <td>
+                  <Button style={"error"} onClick={() => removeProductCart(item.product.id)} message={"Eliminar"} />
+                </td>
               </tr>
             ))}
             <tr>
@@ -67,22 +70,33 @@ const Table = ({ headTable, content }) => {
                 Subtotal:
               </th>
               <td>
-                <FormatNumber price={subTotal} />
+                $ <FormatNumber price={subTotal} />
               </td>
             </tr>
             <tr>
               <th colSpan={4} className="text-right">
-                Total:{" "}
+                Total:
               </th>
               <td>
-                <FormatNumber price={total} />
+                $ <FormatNumber price={total} />
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <Button
+        className="flex"
+        style={"primary"}
+        message="Confirmar"
+        onClick={() => addValuesToCart(subTotal, total)}
+      />
     </div>
   );
 };
+
+Table.propTypes = {
+  headTable: PropTypes.arrayOf(PropTypes.string).isRequired,
+  content: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+}
 
 export default Table;
