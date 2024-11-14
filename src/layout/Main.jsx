@@ -1,8 +1,15 @@
+import useSotreAuth from "../stores/auth/StoreAuth.jsx";
 const Main = () => {
+
+  const { isAuthenticated } = useSotreAuth() || {};
+
+  const {user} = isAuthenticated();
+  
   return (
     <div className="hero bg-base-200 min-h-[45rem]">
       <div className="hero-content text-center">
         <div className="max-w-xl">
+          {user && <h1 className="text-5xl font-bold">{user.username}</h1>}
           <h1 className="text-5xl font-bold">Bienvenido a MiniShop</h1>
           <p className="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
