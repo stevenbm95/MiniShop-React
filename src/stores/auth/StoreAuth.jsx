@@ -7,6 +7,7 @@ const useSotreAuth = create(
     (set, get) => ({
       token: null,
       user: null,
+      isRegister: false,
       setToken: (token) => {
         const decoded = jwtDecode(token);
         set({ token, user: decoded.user });
@@ -18,6 +19,7 @@ const useSotreAuth = create(
           user: get().user,
         };
       },
+      setIsRegister: (state) => set({ isRegister: state }),
     }),
     {
       name: "auth-storage",

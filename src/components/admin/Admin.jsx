@@ -1,6 +1,5 @@
 import useStoreProducts from "../../stores/products/StoreProducts";
 import Button from "../common/Button";
-import Table from "../common/Table";
 import ProductModal from "../products/ProductModal";
 
 const Admin = () => {
@@ -68,7 +67,7 @@ const Admin = () => {
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
-                          src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                           alt="Avatar Tailwind CSS Component"
                         />
                       </div>

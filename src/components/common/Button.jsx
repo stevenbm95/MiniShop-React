@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Button = ({ style, message, onClick,  isDisabled = false }) => {
+const Button = ({ style, message, onClick, otherStyles, isDisabled = false }) => {
   const styles = {
     primary: "btn btn-primary",
     error: "btn btn-error",
@@ -12,7 +12,7 @@ const Button = ({ style, message, onClick,  isDisabled = false }) => {
   return (
     <button
       disabled={isDisabled}
-      className={`${styles[style]} text-white`}
+      className={`${styles[style]} ${otherStyles} text-white`}
       onClick={!isDisabled ? onClick : null}
     >
       {message}
@@ -24,6 +24,7 @@ export default Button;
 
 Button.propTypes = {
   style: PropTypes.string,
+  otherStyles: PropTypes.string,
   message: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   idProduct: PropTypes.string,

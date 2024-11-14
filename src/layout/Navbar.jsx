@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const {resetCart} = useStoreCart()
-  const { isAuthenticated, logout} = useSotreAuth();
+  const { isAuthenticated, logout, setIsRegister} = useSotreAuth();
   const {isAuth } = isAuthenticated();
   const navigate = useNavigate();
 
@@ -17,6 +17,15 @@ const Navbar = () => {
       prevDropdown === dropdown ? null : dropdown
     );
   };
+
+  const handleRegister = () => {
+    setIsRegister(true);
+  }
+
+  const handleLogin = () => {
+    setIsRegister(false);
+  }
+  
 
   const handleLogout = () => {
     logout();
@@ -77,8 +86,8 @@ const Navbar = () => {
        
       </div>
         <div className={ isAuth ? "hidden" : "font-bold" }>
-          <Link className="" to="/auth"> <span className="px-5">Registrate </span></Link> 
-          <Link className="" to="/auth"><span className="px-5">Login </span></Link>
+          <Link className="" to="/auth" onClick={() => handleRegister()}> <span className="px-5">Registrate </span></Link> 
+          <Link className="" to="/auth" onClick={()=> handleLogin()}><span className="px-5">Login </span></Link>
         </div>
       <div className={isAuth ? "flex-none" : "hidden"}>
         <Cart />
