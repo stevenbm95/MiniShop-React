@@ -8,6 +8,7 @@ export const getProductsApi = async () => {
   try {
     const resp = await axios.get(baseUrl);
     const data = resp.data;
+    console.log("data", data);
     localStorage.setItem("products", JSON.stringify(data));
     console.log("Consulta api");
     
